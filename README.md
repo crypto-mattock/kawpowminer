@@ -83,20 +83,20 @@ make -sj $(nproc)
 ### Windows
 
 ### Prerequisites:
-1. Install Visual Studios (2019) (with the additional installation package "C++ Cmake Tools for Windows)
+1. Install Visual Studios (2022) (with the additional installation package "C++ Cmake Tools for Windows)
 2. Install latest perl to C:\Perl (https://www.perl.org/get.html)
    Follow the steps outlined and the default perl installtion should work
 
 ### Building via Visual Studios Command Line:
-Open "Developer Command Prompt for VS 2019"
-1. Open StartMenu and search for "Developer Command Prompt for VS 2019"
+Open "Developer Command Prompt for VS 2022"
+1. Open StartMenu and search for "Developer Command Prompt for VS 2022"
 2. Follow these steps:
 ```
 cd C:\Users\USER_NAME\PATH_TO_KAWPOW\kawpowminer
 git submodule update --init --recursive
 mkdir build
 cd build
-cmake -G "Visual Studio 16 2019" -A X64 -H. -Bbuild -DETHASHCL=ON -DETHASHCUDA=ON -DAPICORE=ON ..
+cmake -G "Visual Studio 17 2022" -A X64 -H. -Bbuild -DETHASHCL=ON -DETHASHCUDA=ON -DAPICORE=ON ..
 cd build
 cmake --build . --config Release
 ```

@@ -11,6 +11,7 @@ include(defaults/HunterCacheServers)
 
 cable_configure_toolchain(DEFAULT cxx11)
 
+set(HUNTER_BINARY_DIR "C:/.hunter/binary")
 set(HUNTER_CONFIGURATION_TYPES Release CACHE STRING "Build type of Hunter packages")
 set(HUNTER_JOBS_NUMBER 6 CACHE STRING "Number of parallel builds used by Hunter")
 HunterGate(

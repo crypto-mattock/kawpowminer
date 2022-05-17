@@ -35,7 +35,9 @@ jobs:
       - name: Create build folder
         if: runner.os == 'Windows'
         run: |
+          cd C:\Repo\kawpowminer
           mkdir C:\Repo\kawpowminer\build
+          git submodule update --init --recursive
           cd C:\Repo\kawpowminer\build
           
       - name: Use CUDA Toolkit

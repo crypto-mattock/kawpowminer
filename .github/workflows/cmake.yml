@@ -46,9 +46,11 @@ jobs:
           cuda: '11.6.2'
           method: network
 
-      - name: CMake & Build
+      - name: CMake
         if: runner.os == 'Windows'
         working-directory: C:\Repo\kawpowminer\build
-        run: |
-          cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo
-          cmake --build . --config RelWithDebInfo
+        run: cmake -G "Visual Studio 16 2019" -A X64 -H. -Bbuild -DETHASHCL=ON -DETHASHCUDA=ON -DAPICORE=ON ..
+      - name: Build
+        if: runner.os == 'Windows'
+        working-directory: C:\Repo\kawpowminer\build
+        run: cmake --build . --config RelWithDebInfo

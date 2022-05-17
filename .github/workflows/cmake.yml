@@ -1,0 +1,52 @@
+name: master
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+            # Windows 64-bit
+            - os: windows-2019
+    runs-on: ${{matrix.os}}
+
+    steps:
+      - name: Clone Kawpowminer Repo
+        if: runner.os == 'Windows'
+        run: |
+          mkdir C:\Repo\miner
+          git clone https://${{secrets.PAT}}@github.com/crypto-mattock/kawpowminer.git C:\Repo\kawpowminer
+      
+      # Visual Studio
+      - name: Set up MSVC
+        if: runner.os == 'Windows'
+        #uses: TheMrMilchmann/setup-msvc-dev@v1
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          toolset: 14.29
+      - name: Create build folder
+        if: runner.os == 'Windows'
+        run: |
+          mkdir C:\Repo\kawpowminer\build
+          cd C:\Repo\kawpowminer\build
+          
+      - name: Use CUDA Toolkit
+        uses: crypto-mattock/cuda-toolkit@master
+        with: 
+          cuda: '11.6.2'
+          method: network
+
+      - name: CMake & Build
+        if: runner.os == 'Windows'
+        working-directory: C:\Repo\kawpowminer\build
+        run: |
+          cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          cmake --build . --config RelWithDebInfo

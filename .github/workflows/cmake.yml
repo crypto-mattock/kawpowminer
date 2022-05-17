@@ -49,7 +49,7 @@ jobs:
       - name: CMake
         if: runner.os == 'Windows'
         working-directory: C:\Repo\kawpowminer\build
-        run: cmake -G "Visual Studio 16 2019" -A X64 -H . -B build -DETHASHCL=ON -DETHASHCUDA=ON -DAPICORE=ON ..
+        run: cmake -G "Visual Studio 16 2019" -A X64 -DETHASHCL=ON -DETHASHCUDA=ON -DAPICORE=ON ..
       - name: Build
         if: runner.os == 'Windows'
         working-directory: C:\Repo\kawpowminer\build
